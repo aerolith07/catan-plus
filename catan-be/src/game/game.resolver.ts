@@ -1,6 +1,6 @@
 import { Args, Resolver, Mutation, Query } from '@nestjs/graphql';
-import { GameDto } from './gql/game.dto';
-import { GameInput } from './gql/game-input.dto';
+import { GameDto } from './schema/game.dto';
+import { GameInput } from './schema/game-input.dto';
 import { GameService } from './game.service';
 
 @Resolver((of) => GameDto)
