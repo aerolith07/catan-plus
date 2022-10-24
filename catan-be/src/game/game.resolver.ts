@@ -12,7 +12,7 @@ const TRIGGER_EVENT = 'GAME_EVENT';
 
 @Resolver((of) => GameDto)
 export class GameResolver {
-  constructor(private gameService: GameService) {}
+  constructor(private gameService: GameService, private pubsub: PubSub) {}
 
   @Query((returns) => GameDto)
   async game(@Args('id') id: string) {
@@ -23,7 +23,7 @@ export class GameResolver {
     resolve: (payload) => payload,
   })
   async gameEvents() {
-    return pubsub.asyncIterator(TRIGGER_EVENT);
+    return this.pubsub.asyncIterator(TRIGGER_EVENT);
   }
 
   @Mutation((returns) => GameDto)
@@ -31,7 +31,7 @@ export class GameResolver {
     const game = await this.gameService.createGame(input.title);
     console.log('game');
     console.log(game);
-    pubsub.publish(TRIGGER_EVENT, game);
+    this.pubsub.publish(TRIGGER_EVENT, game);
     return game;
   }
 
