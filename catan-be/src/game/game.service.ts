@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Player } from 'src/player/db/player.schema';
 import { PlayerService } from 'src/player/player.service';
+import { PlayerDto } from 'src/player/schema/player.dto';
 import { Game } from './db/game.schema';
 
 @Injectable()
@@ -11,6 +12,10 @@ export class GameService {
     @InjectModel('Game') private readonly gameModel: Model<Game>,
     private readonly playerService: PlayerService,
   ) {}
+
+  async getAllPlayers(players: string[]) {
+    return await this.playerService.findManyPlayers(players);
+  }
 
   async findGameById(id: string) {
     return await this.gameModel.findById(id);

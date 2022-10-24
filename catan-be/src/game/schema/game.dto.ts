@@ -13,6 +13,6 @@ export class GameDto {
   @Field()
   readonly description?: string;
 
-  @Field(() => [String])
-  players: string[];
+  @Field(() => [PlayerDto])
+  players: PlayerDto[];
 }

@@ -2,13 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type GameDto {
-  id: ID!
-  title: String!
-  description: String!
-  players: [String!]!
-}
-
 type Resources {
   brick: Float!
   wood: Float!
@@ -21,6 +14,13 @@ type PlayerDto {
   id: ID!
   name: String!
   resources: Resources!
+}
+
+type GameDto {
+  id: ID!
+  title: String!
+  description: String!
+  players: [PlayerDto!]!
 }
 
 type Query {
@@ -56,4 +56,8 @@ input ExchangeInput {
   toId: String!
   resource: String!
   amount: Float!
+}
+
+type Subscription {
+  gameEvents: GameDto!
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { ObjectId } from 'mongodb';
 import { Player } from './db/player.schema';
 import { ResourceInput } from './schema/collect-input.dto';
 import { PlayerInput } from './schema/player-input.dto';
@@ -31,7 +32,20 @@ export class PlayerService {
   }
 
   async create(input: PlayerInput) {
-    const result = await new this.playerModel({ name: input.username }).save();
+    const result = await new this.playerModel({ name: input.username, resources: {} }).save();
+    return result;
+  }
+
+  async findManyPlayers(playerIds: string[]) {
+    const result = await this.playerModel.find({
+      _id: {
+        $in: playerIds.map((playerId) => {
+          return new ObjectId(playerId);
+        }),
+      },
+    });
+
+    console.log(result);
     return result;
   }
 }

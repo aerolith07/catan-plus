@@ -1,11 +1,12 @@
-import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
+import { Resolver, Query, Args, Mutation, ResolveField, Parent } from '@nestjs/graphql';
 import { ResourceInput } from './schema/collect-input.dto';
 import { ExchangeInput } from './schema/exchange-input.dto';
 import { PlayerInput } from './schema/player-input.dto';
 import { PlayerDto } from './schema/player.dto';
 import { PlayerService } from './player.service';
+import { GameDto } from 'src/game/schema/game.dto';
 
-@Resolver((returns) => PlayerDto)
+@Resolver((of) => PlayerDto)
 export class PlayerResolver {
   constructor(private playerService: PlayerService) {}
 
