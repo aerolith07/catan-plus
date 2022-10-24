@@ -1,8 +1,8 @@
 import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
-import { ResourceInput } from './dto/collect-input.dto';
-import { ExchangeInput } from './dto/exchange-input.dto';
-import { PlayerInput } from './dto/player-input.dto';
-import { PlayerDto } from './dto/player.dto';
+import { ResourceInput } from './schema/collect-input.dto';
+import { ExchangeInput } from './schema/exchange-input.dto';
+import { PlayerInput } from './schema/player-input.dto';
+import { PlayerDto } from './schema/player.dto';
 import { PlayerService } from './player.service';
 
 @Resolver((returns) => PlayerDto)

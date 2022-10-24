@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { PlayerInput } from './dto/player-input.dto';
 import { Player } from './db/player.schema';
-import { ResourceInput } from './dto/collect-input.dto';
+import { ResourceInput } from './schema/collect-input.dto';
+import { PlayerInput } from './schema/player-input.dto';
 
 @Injectable()
 export class PlayerService {
