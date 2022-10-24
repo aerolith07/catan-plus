@@ -1,5 +1,5 @@
 {
-  "name": "catan-be",
+  "name": "mongo-nest",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -25,7 +25,9 @@
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/graphql": "^10.1.3",
+    "@nestjs/mongoose": "^9.2.0",
     "@nestjs/platform-express": "^9.0.0",
+    "@types/mongoose": "^5.11.97",
     "apollo-server-express": "^3.10.3",
     "graphql": "^16.6.0",
     "reflect-metadata": "^0.1.13",

@@ -1,0 +1,59 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type GameDto {
+  id: ID!
+  title: String!
+  description: String!
+  players: [String!]!
+}
+
+type Resources {
+  brick: Float!
+  wood: Float!
+  sheep: Float!
+  grain: Float!
+  rock: Float!
+}
+
+type PlayerDto {
+  id: ID!
+  name: String!
+  resources: Resources!
+}
+
+type Query {
+  game(id: String!): GameDto!
+  player(id: String!): PlayerDto!
+}
+
+type Mutation {
+  createGame(input: GameInput!): GameDto!
+  joinGame(gameId: String!, playerId: String!): GameDto!
+  leaveGame(gameId: String!, playerId: String!): GameDto!
+  createPlayer(input: PlayerInput!): PlayerDto!
+  collect(input: ResourceInput!): PlayerDto!
+  exchange(input: ExchangeInput!): [PlayerDto!]!
+}
+
+input GameInput {
+  title: String!
+}
+
+input PlayerInput {
+  username: String!
+}
+
+input ResourceInput {
+  id: String!
+  resource: String!
+  amount: Float!
+}
+
+input ExchangeInput {
+  fromId: String!
+  toId: String!
+  resource: String!
+  amount: Float!
+}
