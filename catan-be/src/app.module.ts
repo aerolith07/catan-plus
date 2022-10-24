@@ -6,7 +6,6 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GameModule } from './game/game.module';
 import { PlayerModule } from './player/player.module';
-import { PubsubModule } from './pubsub/pubsub.module';
 
 @Module({
   imports: [
@@ -22,7 +21,6 @@ import { PubsubModule } from './pubsub/pubsub.module';
       },
     }),
     MongooseModule.forRoot('mongodb://localhost:27017'),
-    PubsubModule,
   ],
   controllers: [AppController],
   providers: [AppService],

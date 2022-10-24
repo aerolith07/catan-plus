@@ -19,7 +19,9 @@ export class GameResolver {
     return await this.gameService.findGameById(id);
   }
 
-  @Subscription((returns) => GameDto)
+  @Subscription((returns) => GameDto, {
+    resolve: (payload) => payload,
+  })
   async gameEvents() {
     return pubsub.asyncIterator(TRIGGER_EVENT);
   }
@@ -27,6 +29,8 @@ export class GameResolver {
   @Mutation((returns) => GameDto)
   async createGame(@Args('input') input: GameInput) {
     const game = await this.gameService.createGame(input.title);
+    console.log('game');
+    console.log(game);
     pubsub.publish(TRIGGER_EVENT, game);
     return game;
   }
