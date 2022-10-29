@@ -1,0 +1,12 @@
+query getGame {
+	game(id: "6356d3d600665b646fa7bdad") {
+		id,
+		players {
+			id
+			name
+			resources {
+				brick
+			}
+		}
+	}
+}
