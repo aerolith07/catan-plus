@@ -1,15 +1,19 @@
 import { ActionIcon, Grid, Stack } from "@mantine/core";
 import { IconMinus, IconPlus } from "@tabler/icons";
 
-const InventoryItem = () => {
+type InventoryItemProps = {
+  icon: JSX.Element;
+}
+
+const InventoryItem = ({icon}:InventoryItemProps) => {
   return (
 
     <Stack>
-      <ActionIcon>
+      <ActionIcon color={'green'} variant='filled'>
         <IconPlus size={18} />
       </ActionIcon>
-      <div>b</div>
-      <ActionIcon>
+      {icon}
+      <ActionIcon color={'red'} variant='filled'>
         <IconMinus size={18} />
       </ActionIcon>
     </Stack>
