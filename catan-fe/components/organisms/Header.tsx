@@ -1,6 +1,6 @@
 import { ActionIcon,Text, Flex, useMantineColorScheme } from "@mantine/core";
 import { IconMoonStars, IconSun } from "@tabler/icons";
-import Menu from "../molecules/Menu";
+import Menu from "../molecules/HamburgerMenu";
 
 type Props = {};
 
