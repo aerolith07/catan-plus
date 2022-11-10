@@ -1,0 +1,18 @@
+mutation createGame {
+  createGame(input: { title: "title" }) {
+    id
+    title
+    description
+    players {
+      id
+      name
+      resources {
+        brick
+        wood
+        sheep
+        grain
+        rock
+      }
+    }
+  }
+}

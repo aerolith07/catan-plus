@@ -123,12 +123,67 @@ export type Subscription = {
   gameEvents: GameDto;
 };
 
+export type CreateGameMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CreateGameMutation = { __typename?: 'Mutation', createGame: { __typename?: 'GameDto', id: string, title: string, description: string, players: Array<{ __typename?: 'PlayerDto', id: string, name: string, resources: { __typename?: 'Resources', brick: number, wood: number, sheep: number, grain: number, rock: number } }> } };
+
 export type GetGameQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetGameQuery = { __typename?: 'Query', game: { __typename?: 'GameDto', id: string, players: Array<{ __typename?: 'PlayerDto', id: string, name: string, resources: { __typename?: 'Resources', brick: number, wood: number, sheep: number, grain: number, rock: number } }> } };
 
+export type GameEventsSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
+
+export type GameEventsSubscription = { __typename?: 'Subscription', gameEvents: { __typename?: 'GameDto', id: string, title: string, description: string, players: Array<{ __typename?: 'PlayerDto', id: string, name: string, resources: { __typename?: 'Resources', brick: number, wood: number, sheep: number, grain: number, rock: number } }> } };
+
+
+export const CreateGameDocument = gql`
+    mutation createGame {
+  createGame(input: {title: "title"}) {
+    id
+    title
+    description
+    players {
+      id
+      name
+      resources {
+        brick
+        wood
+        sheep
+        grain
+        rock
+      }
+    }
+  }
+}
+    `;
+export type CreateGameMutationFn = Apollo.MutationFunction<CreateGameMutation, CreateGameMutationVariables>;
+
+/**
+ * __useCreateGameMutation__
+ *
+ * To run a mutation, you first call `useCreateGameMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateGameMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createGameMutation, { data, loading, error }] = useCreateGameMutation({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useCreateGameMutation(baseOptions?: Apollo.MutationHookOptions<CreateGameMutation, CreateGameMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateGameMutation, CreateGameMutationVariables>(CreateGameDocument, options);
+      }
+export type CreateGameMutationHookResult = ReturnType<typeof useCreateGameMutation>;
+export type CreateGameMutationResult = Apollo.MutationResult<CreateGameMutation>;
+export type CreateGameMutationOptions = Apollo.BaseMutationOptions<CreateGameMutation, CreateGameMutationVariables>;
 export const GetGameDocument = gql`
     query getGame {
   game(id: "636aca4b8f383a197d633144") {
@@ -174,3 +229,45 @@ export function useGetGameLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Ge
 export type GetGameQueryHookResult = ReturnType<typeof useGetGameQuery>;
 export type GetGameLazyQueryHookResult = ReturnType<typeof useGetGameLazyQuery>;
 export type GetGameQueryResult = Apollo.QueryResult<GetGameQuery, GetGameQueryVariables>;
+export const GameEventsDocument = gql`
+    subscription gameEvents {
+  gameEvents {
+    id
+    title
+    description
+    players {
+      id
+      name
+      resources {
+        brick
+        wood
+        sheep
+        grain
+        rock
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useGameEventsSubscription__
+ *
+ * To run a query within a React component, call `useGameEventsSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useGameEventsSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGameEventsSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGameEventsSubscription(baseOptions?: Apollo.SubscriptionHookOptions<GameEventsSubscription, GameEventsSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<GameEventsSubscription, GameEventsSubscriptionVariables>(GameEventsDocument, options);
+      }
+export type GameEventsSubscriptionHookResult = ReturnType<typeof useGameEventsSubscription>;
+export type GameEventsSubscriptionResult = Apollo.SubscriptionResult<GameEventsSubscription>;

@@ -1,14 +1,10 @@
+import { ApolloProvider } from "@apollo/client";
+import { AppShell } from "@mantine/core";
 import type { NextPage } from "next";
 import Head from "next/head";
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
-import { AppShell, Navbar } from "@mantine/core";
 import Dashboard from "../components/organisms/Dashboard";
 import Header from "../components/organisms/Header";
-
-const client = new ApolloClient({
-  uri: "http://localhost:3030/graphql",
-  cache: new InMemoryCache(),
-});
+import client from "../utils/apollo";
 
 const Home: NextPage = () => {
   return (
