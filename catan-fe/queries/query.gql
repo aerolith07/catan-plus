@@ -1,5 +1,5 @@
-query getGame {
-  game(id: "636aca4b8f383a197d633144") {
+query getGame($id: String!) {
+  game(id: $id) {
     id
     players {
       id

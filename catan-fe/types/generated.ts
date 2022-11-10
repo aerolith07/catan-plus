@@ -128,7 +128,9 @@ export type CreateGameMutationVariables = Exact<{ [key: string]: never; }>;
 
 export type CreateGameMutation = { __typename?: 'Mutation', createGame: { __typename?: 'GameDto', id: string, title: string, description: string, players: Array<{ __typename?: 'PlayerDto', id: string, name: string, resources: { __typename?: 'Resources', brick: number, wood: number, sheep: number, grain: number, rock: number } }> } };
 
-export type GetGameQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetGameQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
 
 
 export type GetGameQuery = { __typename?: 'Query', game: { __typename?: 'GameDto', id: string, players: Array<{ __typename?: 'PlayerDto', id: string, name: string, resources: { __typename?: 'Resources', brick: number, wood: number, sheep: number, grain: number, rock: number } }> } };
@@ -185,8 +187,8 @@ export type CreateGameMutationHookResult = ReturnType<typeof useCreateGameMutati
 export type CreateGameMutationResult = Apollo.MutationResult<CreateGameMutation>;
 export type CreateGameMutationOptions = Apollo.BaseMutationOptions<CreateGameMutation, CreateGameMutationVariables>;
 export const GetGameDocument = gql`
-    query getGame {
-  game(id: "636aca4b8f383a197d633144") {
+    query getGame($id: String!) {
+  game(id: $id) {
     id
     players {
       id
@@ -215,10 +217,11 @@ export const GetGameDocument = gql`
  * @example
  * const { data, loading, error } = useGetGameQuery({
  *   variables: {
+ *      id: // value for 'id'
  *   },
  * });
  */
-export function useGetGameQuery(baseOptions?: Apollo.QueryHookOptions<GetGameQuery, GetGameQueryVariables>) {
+export function useGetGameQuery(baseOptions: Apollo.QueryHookOptions<GetGameQuery, GetGameQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<GetGameQuery, GetGameQueryVariables>(GetGameDocument, options);
       }

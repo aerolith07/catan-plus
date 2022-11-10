@@ -16,7 +16,11 @@ export class GameResolver {
 
   @Query((returns) => GameDto)
   async game(@Args('id') id: string) {
-    return await this.gameService.findGameById(id);
+    const game = await this.gameService.findGameById(id);
+
+    console.log('Publishing something...');
+    this.pubsub.publish(TRIGGER_EVENT, game);
+    return game;
   }
 
   @Subscription((returns) => GameDto, {
@@ -29,8 +33,6 @@ export class GameResolver {
   @Mutation((returns) => GameDto)
   async createGame(@Args('input') input: GameInput) {
     const game = await this.gameService.createGame(input.title);
-    console.log('game');
-    console.log(game);
     this.pubsub.publish(TRIGGER_EVENT, game);
     return game;
   }
