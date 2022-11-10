@@ -20,7 +20,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <AppShell header={<Header></Header>}>
+        <AppShell header={<Header />}>
           <Dashboard />
         </AppShell>
       </main>

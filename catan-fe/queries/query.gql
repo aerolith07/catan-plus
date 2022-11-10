@@ -1,12 +1,16 @@
 query getGame {
-	game(id: "6356d3d600665b646fa7bdad") {
-		id,
-		players {
-			id
-			name
-			resources {
-				brick
-			}
-		}
-	}
+  game(id: "636aca4b8f383a197d633144") {
+    id
+    players {
+      id
+      name
+      resources {
+        brick
+        wood
+        sheep
+        grain
+        rock
+      }
+    }
+  }
 }
