@@ -123,6 +123,11 @@ export type Subscription = {
   gameEvents: GameDto;
 };
 
+
+export type SubscriptionGameEventsArgs = {
+  gameId: Scalars['String'];
+};
+
 export type CreateGameMutationVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -135,7 +140,9 @@ export type GetGameQueryVariables = Exact<{
 
 export type GetGameQuery = { __typename?: 'Query', game: { __typename?: 'GameDto', id: string, players: Array<{ __typename?: 'PlayerDto', id: string, name: string, resources: { __typename?: 'Resources', brick: number, wood: number, sheep: number, grain: number, rock: number } }> } };
 
-export type GameEventsSubscriptionVariables = Exact<{ [key: string]: never; }>;
+export type GameEventsSubscriptionVariables = Exact<{
+  gameId: Scalars['String'];
+}>;
 
 
 export type GameEventsSubscription = { __typename?: 'Subscription', gameEvents: { __typename?: 'GameDto', id: string, title: string, description: string, players: Array<{ __typename?: 'PlayerDto', id: string, name: string, resources: { __typename?: 'Resources', brick: number, wood: number, sheep: number, grain: number, rock: number } }> } };
@@ -233,8 +240,8 @@ export type GetGameQueryHookResult = ReturnType<typeof useGetGameQuery>;
 export type GetGameLazyQueryHookResult = ReturnType<typeof useGetGameLazyQuery>;
 export type GetGameQueryResult = Apollo.QueryResult<GetGameQuery, GetGameQueryVariables>;
 export const GameEventsDocument = gql`
-    subscription gameEvents {
-  gameEvents {
+    subscription gameEvents($gameId: String!) {
+  gameEvents(gameId: $gameId) {
     id
     title
     description
@@ -265,10 +272,11 @@ export const GameEventsDocument = gql`
  * @example
  * const { data, loading, error } = useGameEventsSubscription({
  *   variables: {
+ *      gameId: // value for 'gameId'
  *   },
  * });
  */
-export function useGameEventsSubscription(baseOptions?: Apollo.SubscriptionHookOptions<GameEventsSubscription, GameEventsSubscriptionVariables>) {
+export function useGameEventsSubscription(baseOptions: Apollo.SubscriptionHookOptions<GameEventsSubscription, GameEventsSubscriptionVariables>) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useSubscription<GameEventsSubscription, GameEventsSubscriptionVariables>(GameEventsDocument, options);
       }

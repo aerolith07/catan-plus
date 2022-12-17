@@ -1,7 +1,6 @@
 import { Button, Code, Text } from "@mantine/core";
 import { useEffect, useState } from "react";
-import { useCreateGameMutation, useGameEventsSubscription, useGetGameLazyQuery, useGetGameQuery } from "../../types/generated";
-import Inventory from "../molecules/Inventory";
+import { useCreateGameMutation, useGameEventsSubscription, useGetGameLazyQuery } from "../../types/generated";
 import Opponents from "../molecules/Opponents";
 import Player from "../molecules/Player";
 
@@ -13,7 +12,9 @@ const Dashboard = ({ prop }: DashboardProps) => {
   const [gameId, setGameId] = useState<string>()
 
   const [getGame, data] = useGetGameLazyQuery();
-  const gameEvents = useGameEventsSubscription()
+  const gameEvents = useGameEventsSubscription({
+    variables: {   gameId: "637981b5fdd898c83b91b4d2"  } // TODO: make this dynamic, or pass in as a prop?
+  })
   const [createGame, createGameResult] = useCreateGameMutation()
 
   useEffect(() => {
@@ -36,7 +37,7 @@ const Dashboard = ({ prop }: DashboardProps) => {
       <Code block>{gameId ? gameId : 'id:'}</Code>
       <Button onClick={() => createGame()}>Make a game!</Button>
       <Button onClick={() => handleGetGame()}>Get game!</Button>
-      <Text>Events</Text>
+      <Text>Events/Subscriptions</Text>
       <Code block>{JSON.stringify(gameEvents, null, 2)}</Code>
       <Text>Create Game mutation</Text>
       <Code block>{JSON.stringify({loading: createGameResult.loading,data: createGameResult.data}, null, 2)}</Code>

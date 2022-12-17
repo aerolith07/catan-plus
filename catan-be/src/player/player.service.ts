@@ -11,8 +11,6 @@ export class PlayerService {
   constructor(@InjectModel('Player') private readonly playerModel: Model<Player>) {}
 
   async playerExists(id: string) {
-    console.log('hello');
-
     return await this.playerModel.findById(id);
   }
 
@@ -27,7 +25,6 @@ export class PlayerService {
         $inc: { [`resources.${transaction.resource}`]: transaction.amount },
       },
     );
-    console.log(player);
     return this.getPlayer(transaction.id);
   }
 
@@ -45,7 +42,6 @@ export class PlayerService {
       },
     });
 
-    console.log(result);
     return result;
   }
 }
